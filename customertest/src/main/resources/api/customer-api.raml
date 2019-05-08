@@ -1,0 +1,73 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/7c926be6-3d70-4252-8e3f-e45f15c4d473/ # 
+version: v1
+title: Customer API
+
+
+traits:
+  responseMessage:
+    usage: Used to define response
+    description: Sends a response to json as a message
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {"message": "Data added"}
+
+/Customer:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include Traits/test1.json
+              
+  post:
+    body:
+      application/json:
+        example: |
+           [{"customerName": "Dave","Company": "CAT","ZipCode": "60002","Qty": "303","Cost": "303"}]
+  is:
+    - responseMessage
+      
+  /Customer:
+    get:
+      queryParameters:
+        Zipcode:
+          displayName: Customer Zipcode=
+          description: Enter the customer's zipcode 
+          example: 60002
+          required: true
+          type: integer
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+               {"ZipCode": "60002"} 
+  /CustomerName:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                [{"customerName": "Dave", "customerName": "John"}]
+    post:
+      body:
+        application/json:
+          example: |
+            {"customerName": "Dave"}
+      is:
+        - responseMessage
+                
+
+                
+          
+
+            
+        
+  
+              
+

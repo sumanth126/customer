@@ -1,0 +1,10 @@
+title:customer
+
+/CustomerName:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example: |
+                [{"customerName": "Dave", "customerName": "John"}
